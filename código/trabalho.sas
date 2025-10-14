@@ -55,9 +55,71 @@ ods text= 'Com base nas amostras coletadas, esta seção apresenta a análise do
 As análises a seguir incluem: a proporção de veículos segundo a nacionalidade, a proporção de veículos
 de origem chinesa por dia de coleta e, por fim, a estimação pontual e intervalar dessa proporção.';
 
+
+/*Importação e tratamento dos dados*/]
+
+proc import datafile='/home/u64059723/Natasha/Amostragem/analisar_quarta.xlsx'
+  out=quarta replace dbms=xlsx;
+run;
+
+proc import datafile='/home/u64059723/Natasha/Amostragem/analisar_quinta.xlsx'
+  out=quinta replace dbms=xlsx;
+run;
+
+data quarta; set quarta;
+if Marca = 'Chinês' then chines = 1;
+else chines=0;
+run;
+
+data quinta; set quinta;
+if Marca = 'Chinês' then chines = 1;
+else chines=0;
+run;
+
+data veiculos;
+set quarta quinta; /*Base conjunta*/
+run;
+
+
 ods text= '3.1. Caracterização da Amostra';
 
+
+proc freq data=veiculos;
+  tables dia / nocum;
+run;
+
+proc sort data=veiculos; by dia; run;
+
+proc freq data=veiculos;
+  by dia;
+  tables Marca / nocum;
+run;
+
+proc means data=veiculos mean var;
+  class dia;
+  var chines;
+run;
+
+
+proc means data=quarta mean var;
+var chines;
+run;
+
+proc surveymeans data=quarta total=1125 mean var clm;
+var chines;
+run;
+
+
 ods text= '3.2. Proporção de Veículos Chineses';
+
+proc surveyfreq data=quarta total= 1125;
+tables Marca/deff var;
+run;
+
+proc surveyfreq data=quinta total = 1125;
+tables Marca /deff var;
+run;
+
 
 ods text= '3.3. Comparação entre os dias de coleta';
 
