@@ -1,0 +1,169 @@
+Tabela,Localização,Vaga,Vaga proporcional,Marca
+natasha,LADO ICC SUL,1,-56 ou 1,Europeu
+joao_neves,LADO ICC SUL,5,-52 ou 5,Japones
+joao_neves,LADO ICC SUL,10,-47 ou 10,Europeu
+camila,LADO ICC SUL,15,-42 ou 15,Europeu
+natasha,LADO ICC SUL,49,-8 ou 49,Europeu
+natasha,LADO ICC SUL,52,-5 ou 52,Americano
+joao_neves,LADO ICC SUL,55,-2 ou 55,Americano
+natasha,LADO ICC SUL,56,-1 ou 56,Japones
+joao_neves,LADO RU,61,-23 ou 4,Sem carro
+natasha,LADO RU,74,-10 ou 17,Europeu
+camila,LADO RU,76,-8 ou 19,Japones
+joao_neves,LADO PARADA,87,-51 ou 3,Sem carro
+natasha,LADO PARADA,98,-40 ou 14,Sem carro
+camila,LADO PARADA,99,-39 ou 15,Sem carro
+natasha,LADO PARADA,104,-34 ou 20,Sem carro
+natasha,LADO PARADA,112,-26 ou 28,Sem carro
+camila,LADO PARADA,122,-16 ou 38,Sem carro
+joao_neves,LADO PARADA,123,-15 ou 39,Sem carro
+joao_neves,LADO PARADA,124,-14 ou 40,Sem carro
+joao_neves,LADO PARADA,136,-2 ou 52,Sem carro
+joao_neves,LADO IB,151,-34 ou 13,Sem carro
+joao_neves,LADO IB,156,-29 ou 18,Sem carro
+camila,LADO IB,161,-24 ou 23,Sem carro
+natasha,LADO IB,162,-23 ou 24,Sem carro
+joao_neves,LADO IB,163,-22 ou 25,Sem carro
+joao_neves,LADO IB,165,-20 ou 27,Europeu
+joao_neves,LADO IB,168,-17 ou 30,Sem carro
+joao_neves,LADO IB,170,-15 ou 32,Americano
+joao_neves,LADO IB,179,-6 ou 41,Chines
+joao_neves,A1-A2,190,-11 ou 5,Europeu
+camila,A1-A2,192,-9 ou 7,Europeu
+natasha,A2,203,-36 ou 2,Japones
+joao_neves,A2,207,-32 ou 6,Japones
+camila,A2,208,-31 ou 7,Europeu
+natasha,A2,215,-24 ou 14,Americano
+camila,A2,223,-16 ou 22,Europeu
+natasha,A2,224,-15 ou 23,Americano
+camila,A2-A3,240,-12 ou 1,Europeu
+natasha,A2-A3,246,-6 ou 7,Europeu
+joao_neves,A3,257,-33 ou 5,Europeu
+natasha,A3,262,-28 ou 10,Europeu
+natasha,A3,268,-22 ou 16,Europeu
+joao_neves,A3,279,-11 ou 27,Europeu
+joao_neves,A3-A4,299,-5 ou 9,Sem carro
+camila,A3-A4,300,-4 ou 10,Sem carro
+joao_neves,A4,323,-19 ou 19,Europeu
+joao_neves,A4,331,-11 ou 27,Europeu
+camila,A4,332,-10 ou 28,Europeu
+natasha,A4,338,-4 ou 34,Americano
+natasha,A4-A5,346,-10 ou 4,Sem carro
+natasha,A4-A5,355,-1 ou 13,Sem carro
+joao_neves,A5,359,-35 ou 3,Europeu
+camila,A5,360,-34 ou 4,Europeu
+joao_neves,A5,369,-25 ou 13,Sem carro
+camila,A5,370,-24 ou 14,Sem carro
+joao_neves,A5,381,-13 ou 25,Japones
+natasha,A5-A6,395,-11 ou 1,Sem carro
+natasha,A5-A6,398,-8 ou 4,Sem carro
+camila,A6,417,-27 ou 11,Sem carro
+joao_neves,A6,418,-26 ou 12,Sem carro
+natasha,A6,428,-16 ou 22,Sem carro
+natasha,A6,432,-12 ou 26,Sem carro
+joao_neves,A6-A7,445,-12 ou 1,Sem carro
+joao_neves,A7,477,-18 ou 20,Sem carro
+joao_neves,A7,484,-11 ou 27,Sem carro
+natasha,A7,490,-5 ou 33,Sem carro
+natasha,A7-A8,498,-10 ou 3,Sem carro
+camila,A8,510,-36 ou 2,Sem carro
+natasha,A8,514,-32 ou 6,Sem carro
+natasha,A8,518,-28 ou 10,Sem carro
+natasha,A8,524,-22 ou 16,Sem carro
+joao_neves,A8,527,-19 ou 19,Sem carro
+joao_neves,A8,529,-17 ou 21,Sem carro
+natasha,A8,531,-15 ou 23,Sem carro
+natasha,A8,536,-10 ou 28,Sem carro
+natasha,A8-A9,555,-3 ou 9,Sem carro
+camila,A9,559,-37 ou 1,Sem carro
+natasha,A9,561,-35 ou 3,Sem carro
+joao_neves,A9,566,-30 ou 8,Sem carro
+joao_neves,A9,568,-28 ou 10,Sem carro
+camila,A9,571,-25 ou 13,Sem carro
+natasha,A9,574,-22 ou 16,Sem carro
+camila,A9,577,-19 ou 19,Sem carro
+joao_neves,A9,589,-7 ou 31,Sem carro
+joao_neves,A9,591,-5 ou 33,Sem carro
+joao_neves,A10,611,-10 ou 6,Sem carro
+joao_neves,A10,618,-3 ou 13,Sem carro
+natasha,A10,621,0 ou 16,Sem carro
+joao_neves,B1-B2,629,-24 ou 8,Sul-Coreano
+joao_neves,B1-B2,630,-23 ou 9,Europeu
+natasha,B1-B2,642,-11 ou 21,Japones
+natasha,B1-B2,645,-8 ou 24,Europeu
+joao_neves,B2,659,-56 ou 6,Europeu
+joao_neves,B2,662,-53 ou 9,Europeu
+camila,B2,663,-52 ou 10,Europeu
+natasha,B2,667,-48 ou 14,Europeu
+joao_neves,B2,671,-44 ou 18,Europeu
+natasha,B2,673,-42 ou 20,Americano
+natasha,B2,683,-32 ou 30,Americano
+natasha,B2,688,-27 ou 35,Americano
+joao_neves,B2,693,-22 ou 40,Japones
+joao_neves,B2,701,-14 ou 48,Europeu
+joao_neves,B2,710,-5 ou 57,Europeu
+camila,B2,711,-4 ou 58,Americano
+joao_neves,B2-B3,719,-18 ou 4,Sem carro
+joao_neves,B3,745,-54 ou 8,Sem carro
+camila,B3,750,-49 ou 13,Sul-Coreano
+natasha,B3,752,-47 ou 15,Europeu
+natasha,B3,758,-41 ou 21,Americano
+joao_neves,B3,760,-39 ou 23,Americano
+camila,B3,774,-25 ou 37,Europeu
+natasha,B3,785,-14 ou 48,Europeu
+camila,B3-B4,800,-18 ou 1,Sem carro
+joao_neves,B3-B4,803,-15 ou 4,Sem carro
+joao_neves,B3-B4,809,-9 ou 10,Sem carro
+natasha,B4,830,-50 ou 12,Sem carro
+natasha,B4,870,-10 ou 52,Sem carro
+joao_neves,B4,877,-3 ou 59,Sem carro
+natasha,B4-B5,885,-14 ou 5,Sem carro
+natasha,B4-B5,886,-13 ou 6,Sem carro
+joao_neves,B4-B5,892,-7 ou 12,Sem carro
+natasha,B4-B5,893,-6 ou 13,Sem carro
+natasha,B5,901,-60 ou 2,Sem carro
+joao_neves,B5,904,-57 ou 5,Sem carro
+joao_neves,B5,905,-56 ou 6,Sem carro
+joao_neves,B5,910,-51 ou 11,Sem carro
+camila,B5,917,-44 ou 18,Sem carro
+natasha,B5,919,-42 ou 20,Sem carro
+joao_neves,B5,921,-40 ou 22,Sem carro
+joao_neves,B5,927,-34 ou 28,Japones
+camila,B5,929,-32 ou 30,Europeu
+joao_neves,B5,930,-31 ou 31,Japones
+joao_neves,B5,942,-19 ou 43,Europeu
+joao_neves,B5-B6,963,-12 ou 2,Sem carro
+joao_neves,B5-B6,967,-8 ou 6,Sem carro
+camila,B5-B6,971,-4 ou 10,Europeu
+joao_neves,B6,976,-49 ou 1,Sem carro
+joao_neves,B6,991,-34 ou 16,Sem carro
+camila,B6,1001,-24 ou 26,Europeu
+natasha,B6,1005,-20 ou 30,Sem carro
+joao_neves,B6,1007,-18 ou 32,Sem carro
+natasha,B6,1008,-17 ou 33,Sem carro
+joao_neves,B6,1009,-16 ou 34,Sem carro
+joao_neves,B6,1010,-15 ou 35,Sem carro
+natasha,B6,1012,-13 ou 37,Sem carro
+joao_neves,B6,1021,-4 ou 46,Sem carro
+joao_neves,B6,1025,0 ou 50,Sem carro
+joao_neves,B6-B7,1033,-4 ou 8,Sem carro
+natasha,B7,1038,-49 ou 1,Sem carro
+natasha,B7,1048,-39 ou 11,Sem carro
+joao_neves,B7,1056,-31 ou 19,Sem carro
+natasha,B7,1064,-23 ou 27,Japones
+natasha,B7,1074,-13 ou 37,Sem carro
+natasha,B7,1079,-8 ou 42,Sem carro
+camila,B7-B8,1092,-9 ou 5,Sem carro
+natasha,B8,1105,-20 ou 4,Sem carro
+natasha,B8,1107,-18 ou 6,Sem carro
+natasha,B8,1113,-12 ou 12,Sem carro
+camila,B8,1116,-9 ou 15,Sem carro
+joao_neves,B8,1120,-5 ou 19,Sem carro
+joao_neves,B8,1121,-4 ou 20,Sem carro
+camila,B8,1125,0 ou 24,Sem carro
+andre,B3-B4,810,-8 ou 11,Europeu
+andre,A5-A6,402,-4 ou 8,Sem carro
+andre,B2-B3,724,-13 ou 9,Sem carro
+andre,B4,842,-38 ou 24,Sem carro
+andre,A3,273,-17 ou 21,Sem carro
+andre,A3,274,-16 ou 22,Sem carro

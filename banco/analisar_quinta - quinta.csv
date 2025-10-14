@@ -1,0 +1,169 @@
+Tabela,Localização,Vaga,Vaga proporcional,Marca
+kaua,LADO ICC SUL,17,-40 ou 17,Americano
+andre,LADO ICC SUL,31,-26 ou 31,Europeu
+camila,LADO ICC SUL,35,-22 ou 35,Europeu
+kaua,LADO ICC SUL,42,-15 ou 42,Japones
+camila,LADO ICC SUL,50,-7 ou 50,Americano
+kaua,LADO ICC SUL,56,-1 ou 56,Europeu
+andre,LADO RU,75,-9 ou 18,Europeu
+kaua,LADO RU,82,-2 ou 25,Americano
+camila,LADO PARADA,93,-45 ou 9,Sem carro
+kaua,LADO PARADA,95,-43 ou 11,Sem carro
+andre,LADO PARADA,110,-28 ou 26,Sem carro
+kaua,LADO PARADA,111,-27 ou 27,Sem carro
+kaua,LADO PARADA,123,-15 ou 39,Sem carro
+kaua,LADO PARADA,133,-5 ou 49,Sem carro
+kaua,LADO IB,149,-36 ou 11,Sem carro
+kaua,LADO IB,151,-34 ou 13,Sem carro
+andre,LADO IB,156,-29 ou 18,Sem carro
+andre,LADO IB,162,-23 ou 24,Sem carro
+andre,LADO IB,165,-20 ou 27,Sem carro
+kaua,LADO IB,173,-12 ou 35,Sul-Coreano
+kaua,A1-A2,186,-15 ou 1,Japones
+kaua,A1-A2,187,-14 ou 2,Europeu
+andre,A1-A2,193,-8 ou 8,Europeu
+kaua,A1-A2,199,-2 ou 14,Europeu
+kaua,A2,204,-35 ou 3,Japones
+andre,A2,209,-30 ou 8,Sul-Coreano
+kaua,A2,214,-25 ou 13,Japones
+andre,A2,232,-7 ou 31,Europeu
+kaua,A2,233,-6 ou 32,Europeu
+kaua,A2-A3,240,-12 ou 1,Europeu
+kaua,A2-A3,243,-9 ou 4,Americano
+andre,A3,256,-34 ou 4,Europeu
+camila,A3,260,-30 ou 8,Europeu
+kaua,A3,266,-24 ou 14,Europeu
+kaua,A3,269,-21 ou 17,Europeu
+camila,A3,270,-20 ou 18,Japones
+kaua,A3,271,-19 ou 19,Americano
+andre,A3,273,-17 ou 21,Americano
+andre,A3,274,-16 ou 22,Sul-Coreano
+kaua,A3,277,-13 ou 25,Americano
+camila,A3,287,-3 ou 35,Europeu
+andre,A3,289,-1 ou 37,Europeu
+andre,A4,310,-32 ou 6,Americano
+andre,A4,329,-13 ou 25,Europeu
+kaua,A4,339,-3 ou 35,Europeu
+kaua,A4-A5,344,-12 ou 2,Sem carro
+kaua,A4-A5,348,-8 ou 6,Sem carro
+kaua,A4-A5,351,-5 ou 9,Sem carro
+kaua,A5,366,-28 ou 10,Sem carro
+andre,A5,379,-15 ou 23,Europeu
+kaua,A5,381,-13 ou 25,Sul-Coreano
+andre,A5,391,-3 ou 35,Americano
+camila,A5,392,-2 ou 36,Japones
+camila,A5,393,-1 ou 37,Sem carro
+kaua,A5-A6,397,-9 ou 3,Sem carro
+andre,A5-A6,402,-4 ou 8,Sem carro
+kaua,A5-A6,403,-3 ou 9,Sem carro
+andre,A5-A6,404,-2 ou 10,Sem carro
+kaua,A5-A6,406,0 ou 12,Sem carro
+camila,A6,411,-33 ou 5,Sem carro
+kaua,A6,415,-29 ou 9,Sem carro
+kaua,A6,437,-7 ou 31,Europeu
+kaua,A6,439,-5 ou 33,Sem carro
+kaua,A6-A7,448,-9 ou 4,Sem carro
+andre,A6-A7,450,-7 ou 6,Sem carro
+kaua,A6-A7,451,-6 ou 7,Sem carro
+camila,A6-A7,455,-2 ou 11,Sem carro
+kaua,A6-A7,456,-1 ou 12,Sem carro
+camila,A7,467,-28 ou 10,Sem carro
+kaua,A7-A8,496,-12 ou 1,Sem carro
+andre,A8,514,-32 ou 6,Sem carro
+kaua,A8,517,-29 ou 9,Sem carro
+kaua,A8,525,-21 ou 17,Sem carro
+kaua,A8,535,-11 ou 27,Sem carro
+andre,A8-A9,548,-10 ou 2,Sem carro
+andre,A8-A9,554,-4 ou 8,Sem carro
+andre,A8-A9,556,-2 ou 10,Sem carro
+andre,A9,559,-37 ou 1,Sem carro
+kaua,A9,562,-34 ou 4,Sem carro
+kaua,A9,563,-33 ou 5,Sem carro
+kaua,A9,566,-30 ou 8,Sem carro
+kaua,A9,567,-29 ou 9,Sem carro
+andre,A9,585,-11 ou 27,Sem carro
+kaua,A9,590,-6 ou 32,Sem carro
+kaua,A9,594,-2 ou 36,Sem carro
+kaua,A9,596,0 ou 38,Sem carro
+andre,A9-A10,598,-7 ou 2,Sem carro
+andre,A9-A10,599,-6 ou 3,Sem carro
+kaua,A9-A10,600,-5 ou 4,Sem carro
+kaua,A10,607,-14 ou 2,Sem carro
+kaua,A10,613,-8 ou 8,Sem carro
+kaua,A10,614,-7 ou 9,Sem carro
+andre,A10,615,-6 ou 10,Sem carro
+kaua,A10,619,-2 ou 14,Sem carro
+kaua,A10,620,-1 ou 15,Sem carro
+kaua,B1-B2,622,-31 ou 1,Sem carro
+andre,B1-B2,623,-30 ou 2,Europeu
+andre,B1-B2,627,-26 ou 6,Sem carro
+kaua,B1-B2,645,-8 ou 24,Europeu
+kaua,B2,659,-56 ou 6,Europeu
+andre,B2,664,-51 ou 11,Americano
+camila,B2,667,-48 ou 14,Japones
+andre,B2,675,-40 ou 22,Americano
+camila,B2,676,-39 ou 23,Europeu
+kaua,B2,687,-28 ou 34,Europeu
+kaua,B2,688,-27 ou 35,Americano
+kaua,B2,704,-11 ou 51,Europeu
+andre,B2,713,-2 ou 60,Japones
+andre,B2,714,-1 ou 61,Europeu
+andre,B2-B3,724,-13 ou 9,Europeu
+andre,B2-B3,726,-11 ou 11,Europeu
+andre,B3,744,-55 ou 7,Sem carro
+camila,B3,753,-46 ou 16,Europeu
+camila,B3,759,-40 ou 22,Japones
+kaua,B3,771,-28 ou 34,Japones
+andre,B3,772,-27 ou 35,Europeu
+andre,B3,778,-21 ou 41,Europeu
+andre,B3,781,-18 ou 44,Americano
+kaua,B3,785,-14 ou 48,Europeu
+camila,B3,792,-7 ou 55,Europeu
+andre,B3,797,-2 ou 60,Europeu
+andre,B3-B4,810,-8 ou 11,Sem carro
+kaua,B3-B4,816,-2 ou 17,Europeu
+camila,B3-B4,818,0 ou 19,Americano
+andre,B4,823,-57 ou 5,Japones
+kaua,B4,825,-55 ou 7,Sem carro
+andre,B4,842,-38 ou 24,Japones
+andre,B4,852,-28 ou 34,Japones
+kaua,B4,855,-25 ou 37,Sem carro
+kaua,B4,856,-24 ou 38,Japones
+andre,B4,861,-19 ou 43,Sem carro
+camila,B4,865,-15 ou 47,Sem carro
+kaua,B4,877,-3 ou 59,Sem carro
+andre,B4-B5,882,-17 ou 2,Sem carro
+andre,B4-B5,883,-16 ou 3,Sem carro
+kaua,B4-B5,884,-15 ou 4,Sem carro
+andre,B4-B5,896,-3 ou 16,Sem carro
+andre,B5,902,-59 ou 3,Sem carro
+kaua,B5,921,-40 ou 22,Sem carro
+kaua,B5,957,-4 ou 58,Japones
+andre,B5,958,-3 ou 59,Americano
+andre,B5-B6,971,-4 ou 10,Sem carro
+kaua,B6,979,-46 ou 4,Sem carro
+camila,B6,988,-37 ou 13,Sem carro
+kaua,B6,999,-26 ou 24,Sem carro
+andre,B6,1001,-24 ou 26,Sem carro
+kaua,B6,1021,-4 ou 46,Sem carro
+kaua,B6-B7,1027,-10 ou 2,Sem carro
+andre,B6-B7,1033,-4 ou 8,Sem carro
+kaua,B6-B7,1034,-3 ou 9,Sem carro
+kaua,B6-B7,1036,-1 ou 11,Sem carro
+kaua,B7,1039,-48 ou 2,Sem carro
+kaua,B7,1047,-40 ou 10,Sem carro
+andre,B7,1048,-39 ou 11,Sem carro
+andre,B7,1056,-31 ou 19,Sem carro
+andre,B7,1058,-29 ou 21,Sem carro
+kaua,B7,1061,-26 ou 24,Sem carro
+camila,B7,1062,-25 ou 25,Sem carro
+andre,B7,1084,-3 ou 47,Sem carro
+kaua,B7-B8,1089,-12 ou 2,Sem carro
+camila,B7-B8,1090,-11 ou 3,Sem carro
+andre,B7-B8,1093,-8 ou 6,Sem carro
+kaua,B7-B8,1095,-6 ou 8,Sem carro
+kaua,B8,1107,-18 ou 6,Sem carro
+andre,B8,1110,-15 ou 9,Sem carro
+andre,B8,1114,-11 ou 13,Sem carro
+camila,B8,1118,-7 ou 17,Sem carro
+camila,B8,1119,-6 ou 18,Sem carro
