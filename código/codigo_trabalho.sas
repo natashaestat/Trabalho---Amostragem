@@ -184,17 +184,13 @@ title;
 /*3.3. Comparação entre os Dias de Coleta*/
 
 proc freq data=veiculos noprint;
-  tables dia*chines / chisq expected fisher riskdiff relrisk;
+tables dia*chines / chisq expected fisher riskdiff relrisk;
 run;
 
 /*PROC PRINT dos Resultados */
 /*Tabela de Contingência*/
-data comp_dias; 
-  input Dia $12. Chines Nao_Chines Total;
-  label Dia = "Dia da Coleta" 
-        Chines = "Origem Chinesa" 
-       	Nao_Chines ="Sem Origem Chinesa"
-        Total = "Total";
+data comp_dias; input Dia $12. Chines Nao_Chines Total;
+label Dia = "Dia da Coleta" Chines = "Origem Chinesa" Nao_Chines ="Sem Origem Chinesa" Total = "Total";
 datalines;
 Quarta-feira 1 167 168
 Quinta-feira 0 168 168
@@ -204,7 +200,6 @@ run;
 
 title "Distribuição de Veículos de Origem Chinesa por Dia de Coleta";
 proc print data=comp_dias noobs label;
-  format Sim Nao Total 8.;
 run;
 title;
 
@@ -229,7 +224,7 @@ title;
 
 
 proc freq data=veiculos noprint;
-  tables dia*Marca / chisq expected riskdiff relrisk;
+tables dia*Marca / chisq expected riskdiff relrisk;
 run;
 
 
@@ -247,7 +242,6 @@ run;
 
 title "Distribuição Geral de Veículos por Nacionalidade e Dia da Semana";
 proc print data=dist_nac noobs label;
-  format Americano Chines Europeu Japones SemCarro SulCoreano Total 8.;
 run;
 title;
 
