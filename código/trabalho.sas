@@ -122,7 +122,7 @@ tables valido / out=validade_out;
 run;
 
 data validade_fmt; set validade_out;
-  length Dia $15 Válido $20;
+  length Dia $15 Válido $21;
   Dia = dia;
   Válido = valido;
   Percentual = round(percent, 0.01);
@@ -148,38 +148,59 @@ proc freq data=veiculos noprint;
   tables Marca / out=marcas_out;
 run;
 
-data marcas_quarta marcas_quinta; set marcas_out; length Marca $20;
-  Percentual = round(percent, 0.01);
-  label count = "Frequência" Percentual = "Percentual (%)" Marca = "Nacionalidade / Marca";
-  if dia = "Quarta-feira" then output marcas_quarta;
-  else if dia = "Quinta-feira" then output marcas_quinta;
-  keep Marca count Percentual dia;
+data marcas_quarta; length Marca $20.; input Marca & $20. Freq Percent;
+label Marca="Marca" Freq="Frequência" Percent="Percentual (%)";
+datalines;
+Americano     12  7.14
+Chinês         1  0.60
+Europeu       38 22.62
+Japonês     11  6.55
+Sem carro   104 61.90
+Sul-Coreano  2  1.19
+;
 run;
 
-/*Quarta-feira*/
+data marcas_quinta; length Marca $20.; input Marca & $20. Freq Percent;
+label Marca="Marca" Freq="Frequência" Percent="Percentual (%)";
+datalines;
+Americano        15  8.93
+Chinês            0  0.00
+Europeu          36 21.43
+Japonês          15  8.93
+Sem carro        98 58.33
+Sul-Coreano       4  2.38
+;
+run;
+
+
+/* Quarta-feira */
 title "Distribuição das Marcas de Veículos - Quarta-feira";
 proc print data=marcas_quarta noobs label;
-  format Percentual 6.2;
-run;
-title;
+  var Marca Freq Percent;
+  format Percent 6.2;
+run; title;
 
 title "Gráfico - Distribuição das Marcas (Quarta-feira)";
 proc sgplot data=marcas_quarta;
-  vbar Marca / response=count datalabel;
-  yaxis label="Frequência";
+  vbar Marca / response=Freq datalabel
+               fillattrs=(color=cxE91E63) outlineattrs=(color=cxAD1457) barwidth=0.7;
+  yaxis label="Frequência" grid;
+  xaxis label="Marca" fitpolicy=rotate;
 run; title;
 
-/*Quinta-feira*/
+/* Quinta-feira */
 title "Distribuição das Marcas de Veículos - Quinta-feira";
 proc print data=marcas_quinta noobs label;
-  format Percentual 6.2;
-run;
-title;
+  var Marca Freq Percent;
+  format Percent 6.2;
+run; title;
 
 title "Gráfico - Distribuição das Marcas (Quinta-feira)";
 proc sgplot data=marcas_quinta;
-  vbar Marca / response=count datalabel;
-  yaxis label="Frequência";
+  vbar Marca / response=Freq datalabel
+               fillattrs=(color=cxE91E63) outlineattrs=(color=cxAD1457) barwidth=0.7;
+  yaxis label="Frequência" grid;
+  xaxis label="Marca" fitpolicy=rotate;
 run; title;
 
 ods text= '3.2. Proporção de Veículos Chineses';
@@ -187,7 +208,7 @@ ods text= '3.2. Proporção de Veículos Chineses';
 ods text= 'Nesta subseção, apresenta-se a proporção de veículos de origem chinesa em cada dia e no total. 
 A seguir, são mostrados o cálculo da proporção de veículos chineses (p̂), a proporção total, 
 os intervalos de confiança de 95% e, por fim, um gráfico de barras com intervalo de confiança (erro padrão visual).';
-;
+
 
 
 /*Proporção de Veículos Chineses por dia */
@@ -297,9 +318,7 @@ perfil de veículos varia entre os dias de coleta. Essa verificação baseia-se 
 proporções de cada origem por dia e na aplicação do Teste de Homogeneidade (Qui-Quadrado).
 Por fim, apresenta-se uma visualização gráfica dos resultados.';
 
-proc freq data=veiculos noprint;
-  tables dia*Marca / chisq nocol norow expected;
-run;
+
 
 /*PROC PRINT dos Resultados */
 /*Tabela de Contingência*/
@@ -331,13 +350,19 @@ proc sgplot data=dist_nac(where=(Dia ne "Total"));
 run;
 title;
 
+ods text = 'Na quarta-feira (n = 168), as proporções foram: Americano 7,14%, Chinês 0,60%, 
+Europeu 22,62%, Japonês 6,55%, Sem carro 61,90% e Sul-Coreano 1,19%. Na quinta-feira (n = 168): Americano 8,93%, 
+Chinês 0,00%, Europeu 21,43%, Japonês 8,93%, Sem carro 58,33% e Sul-Coreano 2,38%. As variações entre os dias são
+ pequenas (ex.: Sem carro −3,57 p.p.; Japonês +2,38 p.p.; Americano +1,79 p.p.) e o perfil permanece dominado por
+ “Sem carro” (~60%).';
+
 /* Estatísticas do teste de Qui-Quadrado */
 data quiquad; input Estatistica $42. Valor Probabilidade;
 label Estatistica = "Estatística do Teste" Valor = "Valor Calculado" Probabilidade = "p-valor (Prob > Chi²)";
 datalines;
-Qui-Quadrado de Pearson                  2.8477 0.7235
+Qui-Quadrado de Pearson                   2.8477 0.7235
 Qui-Quadrado da Razão de Verossimilhança 3.2501 0.6615
-Qui-Quadrado de Mantel-Haenszel          0.0909 0.7630
+Qui-Quadrado de Mantel-Haenszel           0.0909 0.7630
 ;
 run;
 
