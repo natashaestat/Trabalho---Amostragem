@@ -104,17 +104,13 @@ run; title;
 
 /*Proporção de Veículos Chineses por dia */
 proc means data=veiculos mean var clm noprint;
-  class dia;
-  var chines;
+class dia;
+var chines;
 run;
 
 data means_dia; input Dia $12. n Média Variância IC_Inferior IC_Superior;
-  label Dia = "Dia da Coleta"
-        n = "Tamanho da Amostra (n)"
-        Média = "Proporção Estimada (p̂)"
-        Variância = "Variância"
-        IC_Inferior = "Limite Inferior (95%)"
-        IC_Superior = "Limite Superior (95%)";
+label Dia = "Dia da Coleta" n = "Tamanho da Amostra (n)"Média = "Proporção Estimada (p̂)"
+Variância = "Variância" IC_Inferior = "Limite Inferior (95%)" IC_Superior = "Limite Superior (95%)";
 datalines;
 Quarta-feira 168 0.0059524 0.0059524 -0.0057992 0.0177040
 Quinta-feira 168 0.0000000 0.0000000 . .
@@ -122,10 +118,8 @@ Quinta-feira 168 0.0000000 0.0000000 . .
 run;
 
 
-
 title "Proporção de Veículos Chineses por Dia - PROC MEANS";
 proc print data=means_dia noobs label;
-  var Dia n Média Variância IC_Inferior IC_Superior;
 run;
 title;
 
@@ -137,20 +131,20 @@ ods graphics / imagename="ic" imagefmt=png;
 ods select DomainPlot;
 title "Estimativas e Intervalos de Confiança da Proporção de Veículos Chineses";
 proc surveymeans data=veiculos mean stderr clm plots=domain;
-  var chines;
-  domain dia;
-  label chines = "Proporção de Veículos Chineses";
+var chines;
+domain dia;
+label chines = "Proporção de Veículos Chineses";
 run;
 ods graphics off;
 
 ods graphics / imagename="distribuicao" imagefmt=png;
 title "Distribuição da Variável 'Chines'";
 proc sgplot data=veiculos;
-  histogram chines / transparency=0.3;
-  density chines / type=kernel;
-  density chines / type=normal;
-  xaxis label="Proporção de Veículos Chineses";
-  yaxis label="Percentual";
+histogram chines / transparency=0.3;
+density chines / type=kernel;
+density chines / type=normal;
+xaxis label="Proporção de Veículos Chineses";
+yaxis label="Percentual";
 run;
 
 ods graphics off;
@@ -159,13 +153,9 @@ title;
 ods listing close;
 
 
-
 data procmeans; input Amostra $16. n Média Variância IC95 $25.;
-label Amostra = "Amostra / Domínio"
-        n = "Tamanho da Amostra (n)"
-        Média = "Proporção Estimada (p̂)"
-        Variância = "Variância"
-        IC95 = "Intervalo de Confiança (95%)";
+label Amostra = "Amostra / Domínio" n = "Tamanho da Amostra (n)" Média = "Proporção Estimada (p̂)"
+Variância = "Variância" IC95 = "Intervalo de Confiança (95%)";
 datalines;
 Amostra Conjunta 336 0.0029760 0.0029760 (-0.0028782 , 0.00883057)
 Quarta-feira     168 0.0059524 0.0059524 (-0.0057992 , 0.01770400)
@@ -175,10 +165,8 @@ run;
 
 title "Proporção de Veículos Chineses por Dia - PROC SURVEYMEANS";
 proc print data=procmeans noobs label;
-  var Amostra n Média Variância IC95;
 run;
 title;
-
 
 /*--------------------------------------------------------------------------------------------------------------------------*/
 /*3.3. Comparação entre os Dias de Coleta*/
