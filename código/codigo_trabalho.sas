@@ -4,56 +4,38 @@
 /*Resultados*/
 /*Importação e tratamento dos dados*/
 
-proc import datafile = '/home/u64059723/Natasha/Amostragem/analisar_quarta.xlsx'
-  out = quarta
-  dbms = xlsx
-  replace;
+proc import datafile = '/home/u64059723/Natasha/Amostragem/analisar_quarta.xlsx' out = quarta dbms = xlsx replace;
 run;
 
-proc import datafile = '/home/u64059723/Natasha/Amostragem/analisar_quinta.xlsx'
-  out = quinta
-  dbms = xlsx
-  replace;
+proc import datafile = '/home/u64059723/Natasha/Amostragem/analisar_quinta.xlsx' out = quinta dbms = xlsx replace;
 run;
 
-data quarta;
-  set quarta;
-  Dia = 'Quarta-feira';
-  if Marca = 'Chines' then chines = 1;
-  else chines = 0;
+data quarta; set quarta;
+Dia = 'Quarta-feira';
+if Marca = 'Chines' then chines = 1; else chines = 0;
 run;
 
-data quinta;
-  set quinta;
-  Dia = 'Quinta-feira';
-  if Marca = 'Chines' then chines = 1;
-  else chines = 0;
+data quinta; set quinta;
+Dia = 'Quinta-feira';
+if Marca = 'Chines' then chines = 1; else chines = 0;
 run;
 
 
-data veiculos;
-  set quarta quinta; /* Base conjunta */
-  if Marca = 'Sem carro' then valido = 'Inválido - Sem Carro';
-  else valido = 'Válido - Com Carro';
+data veiculos; set quarta quinta; /* Base conjunta */
 run;
 
 /*--------------------------------------------------------------------------------------------------------------------------*/
 /*3.1. Caracterização da Amostra*/
 
 /*Tamanho das amostras*/
-proc freq data=veiculos noprint;
-  tables Dia / out=tam_dia(drop=percent);
-run;
-
-data tam_dia; set tam_dia; length Dia $15;
-Dia = dia; label count = "Tamanho da Amostra (n)";
+proc freq data=veiculos noprint; 
+tables Dia / out=tam_dia(drop=percent);
 run;
 
 title "Tamanho da Amostra por Dia de Coleta";
 proc print data=tam_dia noobs label;
-  var Dia count;
+label count = "Tamanho da Amostra (n)";
 run;
-title;
 
 
 /*Frequência de Veículos por Marca*/
