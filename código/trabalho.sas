@@ -70,14 +70,14 @@ run;
 
 data quarta;
   set quarta;
-  dia = 'Quarta-feira';
+  Dia = 'Quarta-feira';
   if Marca = 'Chinês' then chines = 1;
   else chines = 0;
 run;
 
 data quinta;
   set quinta;
-  dia = 'Quinta-feira';
+  Dia = 'Quinta-feira';
   if Marca = 'Chinês' then chines = 1;
   else chines = 0;
 run;
@@ -85,8 +85,8 @@ run;
 
 data veiculos;
   set quarta quinta; /* Base conjunta */
-  if Marca = 'Sem carro' then valido = 'Não';
-  else valido = 'Sim';
+  if Marca = 'Sem carro' then valido = 'Inválido - Sem Carro';
+  else valido = 'Válido - Com Carro';
 run;
 
 
@@ -97,16 +97,13 @@ Apresentam-se o tamanho de cada amostra, o total de informações válidas e a d
 em valores absolutos, além de um gráfico para melhor visualização dos resultados.";
 
 
-
+/*Tamanho das amostras*/
 proc freq data=veiculos noprint;
-  tables dia / out=tam_dia(drop=percent);
+  tables Dia / out=tam_dia(drop=percent);
 run;
 
-data tam_dia; 
-  set tam_dia;
-  length Dia $15;
-  Dia = dia; 
-  label count = "Tamanho da Amostra (n)";
+data tam_dia; set tam_dia; length Dia $15;
+Dia = dia; label count = "Tamanho da Amostra (n)";
 run;
 
 title "Tamanho da Amostra por Dia de Coleta";
@@ -115,16 +112,17 @@ proc print data=tam_dia noobs label;
 run;
 title;
 
+
+/*Quantidade de Vagas com carros*/
 proc sort data=veiculos; by dia; run;
 
 proc freq data=veiculos noprint;
-  by dia;
-  tables valido / out=validade_out;
+by Dia;
+tables valido / out=validade_out;
 run;
 
-data validade_fmt;
-  set validade_out;
-  length Dia $15 Válido $3;
+data validade_fmt; set validade_out;
+  length Dia $15 Válido $20;
   Dia = dia;
   Válido = valido;
   Percentual = round(percent, 0.01);
@@ -140,18 +138,17 @@ title;
 
 ods text = "Observa-se, a partir das tabelas acima, que ambas as amostras apresentaram tamanho idêntico (n = 168).
 Verifica-se também uma proporção elevada de vagas sem automóvel nas duas coletas (por volta de 60% em cada dia).
-Esse volume de observações sem veículo pode impactar as estimativas; ainda assim, como não foi utilizada calibração,
+Esse volume de observações sem veículo pode impactar as estimativas, ainda assim, como não foi utilizada calibração,
 os dados são analisados considerando tais observações.";
 
 
+/*Frequência de Veículos por Marca*/
 proc freq data=veiculos noprint;
-  by dia;
+  by Dia;
   tables Marca / out=marcas_out;
 run;
 
-data marcas_quarta marcas_quinta;
-  set marcas_out;
-  length Marca $20;
+data marcas_quarta marcas_quinta; set marcas_out; length Marca $20;
   Percentual = round(percent, 0.01);
   label count = "Frequência" Percentual = "Percentual (%)" Marca = "Nacionalidade / Marca";
   if dia = "Quarta-feira" then output marcas_quarta;
@@ -159,6 +156,7 @@ data marcas_quarta marcas_quinta;
   keep Marca count Percentual dia;
 run;
 
+/*Quarta-feira*/
 title "Distribuição das Marcas de Veículos - Quarta-feira";
 proc print data=marcas_quarta noobs label;
   format Percentual 6.2;
@@ -166,60 +164,118 @@ run;
 title;
 
 title "Gráfico - Distribuição das Marcas (Quarta-feira)";
-proc gchart data=marcas_quarta;
-  vbar Marca / sumvar=count type=sum discrete inside=freq outside=percent;
-run;
-quit;
-title;
+proc sgplot data=marcas_quarta;
+  vbar Marca / response=count datalabel;
+  yaxis label="Frequência";
+run; title;
 
+/*Quinta-feira*/
 title "Distribuição das Marcas de Veículos - Quinta-feira";
 proc print data=marcas_quinta noobs label;
   format Percentual 6.2;
 run;
 title;
 
-title "Gráfico 3D - Distribuição das Marcas (Quinta-feira)";
-proc gchart data=marcas_quinta;
-  vbar3d Marca / sumvar=count type=sum discrete inside=freq outside=percent width=6 coutline=black;
-run;
-quit;
-title;
+title "Gráfico - Distribuição das Marcas (Quinta-feira)";
+proc sgplot data=marcas_quinta;
+  vbar Marca / response=count datalabel;
+  yaxis label="Frequência";
+run; title;
 
 ods text= '3.2. Proporção de Veículos Chineses';
 
 ods text= 'Nesta subseção, apresenta-se a proporção de veículos de origem chinesa em cada dia e no total. 
 A seguir, são mostrados o cálculo da proporção de veículos chineses (p̂), a proporção total, 
 os intervalos de confiança de 95% e, por fim, um gráfico de barras com intervalo de confiança (erro padrão visual).';
+;
 
-proc means data=veiculos mean var;
+
+/*Proporção de Veículos Chineses por dia */
+proc means data=veiculos mean var clm noprint;
   class dia;
   var chines;
 run;
 
-proc surveymeans data=veiculos mean var clm;
+data means_dia; input Dia $12. n Média Variância IC_Inferior IC_Superior;
+  label Dia = "Dia da Coleta"
+        n = "Tamanho da Amostra (n)"
+        Média = "Proporção Estimada (p̂)"
+        Variância = "Variância"
+        IC_Inferior = "Limite Inferior (95%)"
+        IC_Superior = "Limite Superior (95%)";
+datalines;
+Quarta-feira 168 0.00 0.00 0.00 0.00
+Quinta-feira 168 0.00 0.00 0.00 0.00
+;
+run;
+
+title "Proporção de Veículos Chineses por Dia - PROC MEANS";
+proc print data=means_dia noobs label;
+  var Dia n Média Variância IC_Inferior IC_Superior;
+run;
+title;
+
+/*Estimativas e Intervalos de Confiança*/
+
+proc surveymeans data=veiculos mean stderr clm noprint;
   var chines;
   domain dia;
 run;
 
-proc means data=quarta mean var; var chines; run;
-proc surveymeans data=quarta total=1125 mean var clm; var chines; run;
-
-proc means data=quinta mean var; var chines; run;
-proc surveymeans data=quinta mean var clm; var chines; run;
-
-proc means data=veiculos noprint;
-  class dia;
-  var chines;
-  output out=prop_china (where=(_type_=1)) mean=p_hat;
+data procmeans; input Amostra $16. n Média Variância IC95 $20.;
+label Amostra = "Amostra / Domínio"
+        n = "Tamanho da Amostra (n)"
+        Média = "Proporção Estimada (p̂)"
+        Variância = "Variância"
+        IC95 = "Intervalo de Confiança (95%)";
+datalines;
+Amostra Completa 336 0.00 0.00 0.00-0.00
+Quarta-feira     168 0.00 0.00 0.00-0.00
+Quinta-feira     168 0.00 0.00 0.00-0.00
+;
 run;
 
-title "Proporção de Veículos Chineses por Dia (p̂)";
-proc gchart data=prop_china;
-  vbar dia / sumvar=p_hat type=sum discrete outside=percent;
+title "Proporção de Veículos Chineses por Dia - PROC SURVEYMEANS";
+proc print data=procmeans noobs label;
+  var Amostra n Média Variância IC95;
 run;
-quit;
 title;
 
+ods text = 'Os resultados obtidos indicam que a proporção de veículos de origem chinesa foi nula em ambas as coletas. 
+Na amostra de quarta-feira, observou-se apenas um veículo chinês entre os 168 veículos observados, 
+enquanto na quinta-feira não foi registrado nenhum veículo dessa origem. 
+Dessa forma, a proporção estimada (p̂) aproximou-se de zero em ambos os dias, 
+com variância igual a zero e intervalos de confiança de 95% cujos limites inferior e
+superior também se situaram em 0,00.';
+
+ods text = 'Em termos práticos, isso significa que, dentro da amostra observada, 
+a presença de montadoras chinesas foi estatisticamente desprezível. 
+Os gráficos a seguir reforçam essa constatação, evidenciando a ausência de variação nas 
+estimativas de proporção entre os dois dias e no total da amostra.';
+
+/*Gráficos */
+
+data graf_means; set means_dia;
+Prop = Média * 100;
+run;
+
+title "Proporção de Veículos Chineses por Dia";
+proc sgplot data=graf_means;
+  vbar Dia / response=Prop datalabel;
+  yaxis label="Proporção (%)";
+run;
+title;
+
+data graf_proc; set procmeans;
+Prop = Média * 100;
+run;
+
+title "Proporção Total e por Dia de Veículos Chineses";
+proc sgplot data=graf_proc;
+  vbar Amostra / response=Prop datalabel;
+  yaxis label="Proporção (%)";
+run;
+title;
 
 
 ods text= '3.3. Comparação entre os Dias de Coleta';
@@ -241,25 +297,74 @@ perfil de veículos varia entre os dias de coleta. Essa verificação baseia-se 
 proporções de cada origem por dia e na aplicação do Teste de Homogeneidade (Qui-Quadrado).
 Por fim, apresenta-se uma visualização gráfica dos resultados.';
 
-proc freq data=veiculos;
+proc freq data=veiculos noprint;
   tables dia*Marca / chisq nocol norow expected;
 run;
 
-title "Distribuição por Nacionalidade, por Dia";
-proc gchart data=veiculos;
-  vbar Marca / discrete group=dia;
+/*PROC PRINT dos Resultados */
+/*Tabela de Contingência*/
+data dist_nac; input Dia $12. Americano Chines Europeu Japones SemCarro SulCoreano Total;
+label Dia = "Dia da Coleta" Americano  = "Americano" Chines = "Chinês" Europeu = "Europeu" Japones = "Japonês"
+SemCarro = "Sem carro" SulCoreano = "Sul-Coreano" Total = "Total";
+datalines;
+Quarta-feira 12 1 38 11 104 2 168
+Quinta-feira 15 0 36 15  98 4 168
+Total        27 1 74 26 202 6 336
+;
 run;
-quit;
+
+title "Distribuição Geral de Veículos por Nacionalidade e Dia da Semana";
+proc print data=dist_nac noobs label;
+  format Americano Chines Europeu Japones SemCarro SulCoreano Total 8.;
+run;
 title;
+
+title "Distribuição de Veículos por Nacionalidade - Comparação entre Dias";
+proc sgplot data=dist_nac(where=(Dia ne "Total"));
+  vbar Dia / response=Americano datalabel;
+  vbar Dia / response=Chines datalabel;
+  vbar Dia / response=Europeu datalabel;
+  vbar Dia / response=Japones datalabel;
+  vbar Dia / response=SemCarro datalabel;
+  vbar Dia / response=SulCoreano datalabel;
+  yaxis label="Frequência de Veículos";
+run;
+title;
+
+/* Estatísticas do teste de Qui-Quadrado */
+data quiquad; input Estatistica $42. Valor Probabilidade;
+label Estatistica = "Estatística do Teste" Valor = "Valor Calculado" Probabilidade = "p-valor (Prob > Chi²)";
+datalines;
+Qui-Quadrado de Pearson                  2.8477 0.7235
+Qui-Quadrado da Razão de Verossimilhança 3.2501 0.6615
+Qui-Quadrado de Mantel-Haenszel          0.0909 0.7630
+;
+run;
+
+title "Teste de Homogeneidade (Qui-Quadrado) - Nacionalidade x Dia";
+proc print data=quiquad noobs label;
+run;
+title;
+
+ods text = 'Com base no Teste de Homogeneidade (Qui-Quadrado), o valor de p obtido (p = 0,72) indica que 
+não há evidências estatisticamente significativas de diferença na distribuição das nacionalidades de veículos 
+entre quarta e quinta-feira. Ou seja, o perfil de origem dos automóveis manteve-se homogêneo entre os dois dias de coleta.';
+
+ods text = 'Observa-se também que cerca de 60% das observações correspondem a vagas sem automóvel, 
+o que pode reduzir a potência do teste e aumentar a proporção de células com frequência esperada inferior a 5. 
+Ainda assim, mesmo considerando essa limitação, os resultados confirmam que a variação entre os dias é mínima.';
+
+
 
 ods text= '3.5. Estimativa Final e Precisão';
 
 ods text= 'Como última análise, apresenta-se a estimativa pontual, o intervalo de confiança de 95% e a 
 margem de erro observada, comparando-a com a margem de erro planejada (7%).';
 
+
+
 /*Conclusão*/
 ods text = 'Conclusão';
 
 
 ods word close;
-
