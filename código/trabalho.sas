@@ -10,6 +10,7 @@ data _null_;
    put 'Grupo 1 (ICC Sul)';
 run;
 
+/*--------------------------------------------------------------------------------------------------------------------------*/
 
 /*Introdução*/
 ods text= '1. Introdução';
@@ -39,7 +40,7 @@ ods text = "Referências:
 https://www.gazetadopovo.com.br/economia/avanco-montadoras-chinesas-brasil-byd-gwm/
 https://www.uol.com.br/carros/noticias/redacao/2025/05/24/quais-marcas-chinesas-ja-estao-no-brasil-quais-virao-e-quais-ja-se-foram.htm?cmpid=copiaecola";
 
-
+/*--------------------------------------------------------------------------------------------------------------------------*/
 
 /*Metodologia*/
 /*Plano Amostral*/
@@ -47,6 +48,7 @@ https://www.uol.com.br/carros/noticias/redacao/2025/05/24/quais-marcas-chinesas-
 ods text= '2. Metodologia';
 ods text = '2.1. Plano Amostral';
 
+/*--------------------------------------------------------------------------------------------------------------------------*/
 
 /*Resultados*/
 ods text = "3. Análise dos Resultados";
@@ -71,14 +73,14 @@ run;
 data quarta;
   set quarta;
   Dia = 'Quarta-feira';
-  if Marca = 'Chinês' then chines = 1;
+  if Marca = 'Chines' then chines = 1;
   else chines = 0;
 run;
 
 data quinta;
   set quinta;
   Dia = 'Quinta-feira';
-  if Marca = 'Chinês' then chines = 1;
+  if Marca = 'Chines' then chines = 1;
   else chines = 0;
 run;
 
@@ -89,6 +91,7 @@ data veiculos;
   else valido = 'Válido - Com Carro';
 run;
 
+/*--------------------------------------------------------------------------------------------------------------------------*/
 
 ods text = "3.1. Caracterização da Amostra";
 
@@ -203,11 +206,14 @@ proc sgplot data=marcas_quinta;
   xaxis label="Marca" fitpolicy=rotate;
 run; title;
 
+/*--------------------------------------------------------------------------------------------------------------------------*/
+
+
 ods text= '3.2. Proporção de Veículos Chineses';
 
-ods text= 'Nesta subseção, apresenta-se a proporção de veículos de origem chinesa em cada dia e no total. 
-A seguir, são mostrados o cálculo da proporção de veículos chineses (p̂), a proporção total, 
-os intervalos de confiança de 95% e, por fim, um gráfico de barras com intervalo de confiança (erro padrão visual).';
+ods text= 'Nesta subseção, apresenta-se a proporção de veículos de origem chinesa em cada dia e no total da amostra. 
+A seguir, são mostradas as estimativas pontuais (p̂), as variâncias associadas e os intervalos de confiança de 95%, 
+bem como os gráficos de estimativas com erro padrão visual e a distribuição da variável.';
 
 
 
@@ -225,10 +231,12 @@ data means_dia; input Dia $12. n Média Variância IC_Inferior IC_Superior;
         IC_Inferior = "Limite Inferior (95%)"
         IC_Superior = "Limite Superior (95%)";
 datalines;
-Quarta-feira 168 0.00 0.00 0.00 0.00
-Quinta-feira 168 0.00 0.00 0.00 0.00
+Quarta-feira 168 0.0059524 0.0059524 -0.0057992 0.0177040
+Quinta-feira 168 0.0000000 0.0000000 . .
 ;
 run;
+
+
 
 title "Proporção de Veículos Chineses por Dia - PROC MEANS";
 proc print data=means_dia noobs label;
@@ -236,23 +244,42 @@ proc print data=means_dia noobs label;
 run;
 title;
 
+
 /*Estimativas e Intervalos de Confiança*/
 
-proc surveymeans data=veiculos mean stderr clm noprint;
+ods graphics on;
+ods select DomainPlot;
+
+title "Estimativas e Intervalos de Confiança da Proporção de Veículos Chineses";
+proc surveymeans data=veiculos mean stderr clm plots=domain;
   var chines;
   domain dia;
+  label chines = "Proporção de Veículos Chineses";
 run;
 
-data procmeans; input Amostra $16. n Média Variância IC95 $20.;
+title "Distribuição da Variável 'Chines'";
+proc sgplot data=veiculos;
+  histogram chines / transparency=0.3;
+  density chines / type=kernel;
+  density chines / type=normal;
+  xaxis label="Proporção de Veículos Chineses";
+  yaxis label="Percentual";
+run;
+
+ods graphics off;
+title;
+
+
+data procmeans; input Amostra $16. n Média Variância IC95 $25.;
 label Amostra = "Amostra / Domínio"
         n = "Tamanho da Amostra (n)"
         Média = "Proporção Estimada (p̂)"
         Variância = "Variância"
         IC95 = "Intervalo de Confiança (95%)";
 datalines;
-Amostra Completa 336 0.00 0.00 0.00-0.00
-Quarta-feira     168 0.00 0.00 0.00-0.00
-Quinta-feira     168 0.00 0.00 0.00-0.00
+Amostra Conjunta 336 0.0029760 0.0029760 (-0.0028782 , 0.00883057)
+Quarta-feira     168 0.0059524 0.0059524 (-0.0057992 , 0.01770400)
+Quinta-feira     168 0.0000000 0.0000000 .
 ;
 run;
 
@@ -262,54 +289,99 @@ proc print data=procmeans noobs label;
 run;
 title;
 
-ods text = 'Os resultados obtidos indicam que a proporção de veículos de origem chinesa foi nula em ambas as coletas. 
-Na amostra de quarta-feira, observou-se apenas um veículo chinês entre os 168 veículos observados, 
-enquanto na quinta-feira não foi registrado nenhum veículo dessa origem. 
-Dessa forma, a proporção estimada (p̂) aproximou-se de zero em ambos os dias, 
-com variância igual a zero e intervalos de confiança de 95% cujos limites inferior e
-superior também se situaram em 0,00.';
+ods text= 'Os resultados evidenciam que, na amostra de quarta-feira, foi registrado um veículo de origem chinesa entre os 168 observados, 
+correspondendo a uma proporção estimada (p̂) de aproximadamente 0,6%. Na quinta-feira, não foi observada nenhuma ocorrência desse 
+tipo de veículo, resultando em proporção nula. Quando se considera a amostra conjunta (336 veículos), a proporção média de veículos 
+chineses situa-se próxima de 0,3%, indicando uma presença muito reduzida desse grupo no total observado.';
 
-ods text = 'Em termos práticos, isso significa que, dentro da amostra observada, 
-a presença de montadoras chinesas foi estatisticamente desprezível. 
-Os gráficos a seguir reforçam essa constatação, evidenciando a ausência de variação nas 
-estimativas de proporção entre os dois dias e no total da amostra.';
+ods text= 'Os intervalos de confiança de 95% para as estimativas apresentam ampla amplitude relativa, 
+o que é esperado diante da baixa frequência de ocorrência e do tamanho amostral limitado. 
+Na quarta-feira, o intervalo compreende valores próximos de zero, indo de aproximadamente –0,0058 a 0,0177, 
+sugerindo que, estatisticamente, a proporção verdadeira pode variar dentro dessa faixa, ainda muito próxima de zero. 
+Na quinta-feira, como não houve registros, a variância e o intervalo de confiança não foram definidos.';
 
-/*Gráficos */
+ods text= 'A análise gráfica complementa os resultados numéricos e ajuda a visualizar a distribuição da variável e o comportamento 
+das estimativas por dia. No primeiro gráfico, observa-se que as estimativas pontuais da proporção de veículos chineses, 
+tanto na quarta-feira quanto na quinta-feira, estão próximas de zero, com intervalos de confiança muito amplos em termos relativos.
+A amplitude vertical das barras indica que, apesar de as estimativas serem pequenas, há variação estatística 
+considerável em torno do valor médio, embora os limites inferior e superior permaneçam próximos de zero. 
+A amostra total (Full Sample) segue o mesmo padrão, reforçando a baixa incidência geral de veículos dessa origem.';
 
-data graf_means; set means_dia;
-Prop = Média * 100;
-run;
+ods text= 'O segundo gráfico, que mostra a distribuição da variável "chines", evidencia uma forte concentração de observações no valor zero, 
+indicando que a maioria dos veículos observados não é de origem chinesa. 
+As curvas de densidade normal e kernel demonstram que a distribuição é altamente assimétrica à direita, com uma cauda longa, 
+resultado de poucas ocorrências positivas (ou seja, registros de veículos chineses) em meio a um grande número de zeros. 
+Essa forma de distribuição é típica de variáveis dicotômicas com eventos raros e reforça a interpretação anterior: 
+a presença de veículos de origem chinesa na amostra é estatisticamente residual.';
 
-title "Proporção de Veículos Chineses por Dia";
-proc sgplot data=graf_means;
-  vbar Dia / response=Prop datalabel;
-  yaxis label="Proporção (%)";
-run;
-title;
-
-data graf_proc; set procmeans;
-Prop = Média * 100;
-run;
-
-title "Proporção Total e por Dia de Veículos Chineses";
-proc sgplot data=graf_proc;
-  vbar Amostra / response=Prop datalabel;
-  yaxis label="Proporção (%)";
-run;
-title;
+/*--------------------------------------------------------------------------------------------------------------------------*/
 
 
 ods text= '3.3. Comparação entre os Dias de Coleta';
 
 ods text= 'Com o objetivo de verificar se o comportamento amostral difere entre os dias de coleta, 
-compara-se a proporção de veículos chineses observada em cada um deles. Em seguida, apresenta-se o teste de 
-diferença de proporções (Teste Qui-Quadrado 2x2) e a interpretação dos resultados obtidos.';
+compara-se a proporção de veículos de origem chinesa observada em cada um deles. 
+Essa verificação é realizada por meio da tabela de contingência 2×2 e do Teste de Diferença de Proporções 
+(Qui-Quadrado e Exato de Fisher), apropriados para variáveis dicotômicas com baixa frequência de ocorrência.';
 
-
-proc freq data=veiculos;
-  tables dia*chines / chisq expected riskdiff relrisk;
+proc freq data=veiculos noprint;
+  tables dia*chines / chisq expected fisher riskdiff relrisk;
 run;
 
+/*PROC PRINT dos Resultados */
+/*Tabela de Contingência*/
+data comp_dias; 
+  input Dia $12. Chines Nao_Chines Total;
+  label Dia = "Dia da Coleta" 
+        Chines = "Origem Chinesa" 
+       	Nao_Chines ="Sem Origem Chinesa"
+        Total = "Total";
+datalines;
+Quarta-feira 1 167 168
+Quinta-feira 0 168 168
+Total        1 335 336
+;
+run;
+
+title "Distribuição de Veículos de Origem Chinesa por Dia de Coleta";
+proc print data=comp_dias noobs label;
+  format Sim Nao Total 8.;
+run;
+title;
+
+ods text = 'Na quarta-feira (n = 168), observou-se apenas um veículo de origem chinesa, o que representa uma 
+proporção estimada (p̂) de aproximadamente 0,6%. Na quinta-feira (n = 168), não foram observados veículos dessa origem, 
+resultando em proporção nula. No total da amostra (n = 336), a proporção conjunta é de 0,3%, o que caracteriza 
+uma ocorrência bastante rara no conjunto de dados.';
+
+
+/* Estatísticas do teste de Qui-Quadrado */
+
+data quiquad33; input Estatistica $40. Valor Probabilidade; 
+label Estatistica = "Estatística do Teste" Valor = "Valor Calculado" Probabilidade = "p-valor (Prob > Chi²)";
+datalines;
+Qui-Quadrado de Pearson                  1.0000 0.3173
+Teste Exato de Fisher                    .      0.3170
+;
+run;
+
+
+title "Teste de Diferença de Proporções (Qui-Quadrado e Fisher) - Origem Chinesa x Dia";
+proc print data=quiquad33 noobs label;
+run;
+title;
+
+ods text = 'Com base nos testes aplicados, o valor de p obtido (p = 0,32) indica que não há diferença estatisticamente 
+significativa entre as proporções de veículos chineses registradas na quarta e na quinta-feira. 
+Ou seja, a ocorrência de automóveis de origem chinesa manteve-se homogênea entre os dois dias de coleta.';
+
+ods text = 'Considerando-se o número extremamente baixo de observações positivas (apenas um veículo chinês em todo o período), 
+o poder estatístico do teste é limitado, e pequenas flutuações amostrais podem alterar os resultados numéricos sem 
+impactar a interpretação geral. Assim, conclui-se que, para o intervalo analisado, a presença de veículos chineses foi 
+estatisticamente desprezível e não apresentou variação entre os dias.';
+
+
+/*--------------------------------------------------------------------------------------------------------------------------*/
 
 ods text= '3.4. Distribuição Geral por Nacionalidade';
 
@@ -318,6 +390,9 @@ perfil de veículos varia entre os dias de coleta. Essa verificação baseia-se 
 proporções de cada origem por dia e na aplicação do Teste de Homogeneidade (Qui-Quadrado).
 Por fim, apresenta-se uma visualização gráfica dos resultados.';
 
+proc freq data=veiculos noprint;
+  tables dia*Marca / chisq expected riskdiff relrisk;
+run;
 
 
 /*PROC PRINT dos Resultados */
@@ -338,18 +413,6 @@ proc print data=dist_nac noobs label;
 run;
 title;
 
-title "Distribuição de Veículos por Nacionalidade - Comparação entre Dias";
-proc sgplot data=dist_nac(where=(Dia ne "Total"));
-  vbar Dia / response=Americano datalabel;
-  vbar Dia / response=Chines datalabel;
-  vbar Dia / response=Europeu datalabel;
-  vbar Dia / response=Japones datalabel;
-  vbar Dia / response=SemCarro datalabel;
-  vbar Dia / response=SulCoreano datalabel;
-  yaxis label="Frequência de Veículos";
-run;
-title;
-
 ods text = 'Na quarta-feira (n = 168), as proporções foram: Americano 7,14%, Chinês 0,60%, 
 Europeu 22,62%, Japonês 6,55%, Sem carro 61,90% e Sul-Coreano 1,19%. Na quinta-feira (n = 168): Americano 8,93%, 
 Chinês 0,00%, Europeu 21,43%, Japonês 8,93%, Sem carro 58,33% e Sul-Coreano 2,38%. As variações entre os dias são
@@ -357,7 +420,7 @@ Chinês 0,00%, Europeu 21,43%, Japonês 8,93%, Sem carro 58,33% e Sul-Coreano 2,
  “Sem carro” (~60%).';
 
 /* Estatísticas do teste de Qui-Quadrado */
-data quiquad; input Estatistica $42. Valor Probabilidade;
+data quiquad34; input Estatistica $42. Valor Probabilidade;
 label Estatistica = "Estatística do Teste" Valor = "Valor Calculado" Probabilidade = "p-valor (Prob > Chi²)";
 datalines;
 Qui-Quadrado de Pearson                   2.8477 0.7235
@@ -367,7 +430,7 @@ Qui-Quadrado de Mantel-Haenszel           0.0909 0.7630
 run;
 
 title "Teste de Homogeneidade (Qui-Quadrado) - Nacionalidade x Dia";
-proc print data=quiquad noobs label;
+proc print data=quiquad34 noobs label;
 run;
 title;
 
@@ -379,7 +442,7 @@ ods text = 'Observa-se também que cerca de 60% das observações correspondem a
 o que pode reduzir a potência do teste e aumentar a proporção de células com frequência esperada inferior a 5. 
 Ainda assim, mesmo considerando essa limitação, os resultados confirmam que a variação entre os dias é mínima.';
 
-
+/*--------------------------------------------------------------------------------------------------------------------------*/
 
 ods text= '3.5. Estimativa Final e Precisão';
 
@@ -393,3 +456,4 @@ ods text = 'Conclusão';
 
 
 ods word close;
+
