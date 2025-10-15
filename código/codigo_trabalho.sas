@@ -56,29 +56,6 @@ run;
 title;
 
 
-/*Quantidade de Vagas com carros*/
-proc sort data=veiculos; by dia; run;
-
-proc freq data=veiculos noprint;
-by Dia;
-tables valido / out=validade_out;
-run;
-
-data validade_fmt; set validade_out;
-  length Dia $15 Válido $21;
-  Dia = dia;
-  Válido = valido;
-  Percentual = round(percent, 0.01);
-  label count = "Frequência" Percentual = "Percentual (%)";
-  keep Dia Válido count Percentual;
-run;
-
-title "Distribuição da Validade dos Registros por Dia da Semana";
-proc print data=validade_fmt noobs label;
-  format Percentual 6.2;
-run;
-title;
-
 /*Frequência de Veículos por Marca*/
 proc freq data=veiculos noprint;
   by Dia;
@@ -173,16 +150,18 @@ title;
 
 /*Estimativas e Intervalos de Confiança*/
 
-ods graphics on;
+ods listing gpath='/home/u64059723/Natasha/Amostragem/';
+ods graphics / imagename="ic" imagefmt=png;
 ods select DomainPlot;
-
 title "Estimativas e Intervalos de Confiança da Proporção de Veículos Chineses";
 proc surveymeans data=veiculos mean stderr clm plots=domain;
   var chines;
   domain dia;
   label chines = "Proporção de Veículos Chineses";
 run;
+ods graphics off;
 
+ods graphics / imagename="distribuicao" imagefmt=png;
 title "Distribuição da Variável 'Chines'";
 proc sgplot data=veiculos;
   histogram chines / transparency=0.3;
@@ -194,6 +173,9 @@ run;
 
 ods graphics off;
 title;
+
+ods listing close;
+
 
 
 data procmeans; input Amostra $16. n Média Variância IC95 $25.;
@@ -302,11 +284,3 @@ title "Teste de Homogeneidade (Qui-Quadrado) - Nacionalidade x Dia";
 proc print data=quiquad34 noobs label;
 run;
 title;
-
-
-
-
-
-
-
-
