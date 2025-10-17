@@ -237,6 +237,6 @@ title;
 
 title "Distribuição Geral de Veículos por Nacionalidade e Dia da Semana";
 proc freq data=veiculos;
-tables dia*Marca / chisq expected riskdiff relrisk;
+tables dia*Marca / chisq expected;
 run;
 title;
