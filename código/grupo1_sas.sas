@@ -28,6 +28,10 @@ run;
 proc sort data=veiculos; by Dia;
 run;
 
+proc export data=veiculos outfile="/home/u64059723/Natasha/Amostragem/grupo1_amostra.xlsx" dbms=xlsx
+replace;
+run;
+
 /*--------------------------------------------------------------------------------------------------------------------------*/
 /*3.1. Caracterização da Amostra*/
 
